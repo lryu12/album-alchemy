@@ -7,7 +7,7 @@
   },
 
     "compilerOptions": {
-      "lib": ["esnext"],
+      "lib": ["esnext", "deno.ns"],
       "types": ["https://deno.land/x/oak@v12.1.0/types.d.ts"]
     }
 

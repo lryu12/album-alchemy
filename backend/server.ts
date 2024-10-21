@@ -1,5 +1,6 @@
 import { Application, Router } from "https://deno.land/x/oak/mod.ts";
 import { oakCors } from "https://deno.land/x/cors/mod.ts";
+import { load } from "jsr:@std/dotenv";
 import console from "node:console";
 const router = new Router();
 const clientID = "3d979a6ac63b405a8840157f354f8238";
@@ -7,10 +8,17 @@ const clientSecret = "7b3384f318de4e639df948d94ebfda62";
 const redirect_uri = "http://localhost:8080/callback";
 const app = new Application();
 const port = 8080;
+// Automatically load environment variables from a `.env` file
 
 app.use(router.routes());
 app.use(router.allowedMethods());
 console.log(`Server running on http://localhost:${port}`);
+
+
+
+console.log(await load({ export: true })); // { GREETING: "hello world" }
+console.log(Deno.env.get("CLIENTID")); // hello world
+
 
 app.listen({ port: port });
 
@@ -29,6 +37,7 @@ router.get("/", (ctx) => {
       </body>
     </html>
   `;
+  
 });
 
 
