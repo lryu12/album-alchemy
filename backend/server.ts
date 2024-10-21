@@ -67,7 +67,7 @@ router.get("/callback", async (ctx) => {
 
   });
   console.log(tokenResult);
-  const accessToken = await tokenResult.json();
+  const accessToken : unknown = await tokenResult.json();
   console.log(accessToken.access_token);
   globalAccessToken = accessToken.access_token;
   
