@@ -1,7 +1,10 @@
 "use client"
 import React, { useState, useEffect } from 'react'
 import { Track} from 'models/Album.ts'
+import { QueryClient, QueryClientProvider ,useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
 import '../globals.css'
+
+const queryClient = new QueryClient();
 const page = () => {
 
   const fetchAuth = async () => {
@@ -64,16 +67,35 @@ const page = () => {
     );
   }
 
+  function DisplayStartButton() {
+    if (responseTrackData && responseTrackData != []) {
+      return (
+        <button>Play!</button>
+        
+      )
+    } else {
+      return <p></p>
+    }
+  }
+
   return (
-    <div className="w-screen h-screen bg-lighter-gray text-white" >
-        <form onSubmit={handleSubmit} className="p-10">
-            <label>
-                Who's Your Favorite Artist?
-                <input onChange={handleInputChange} className=" m-7 rounded bg-lightest-gray" type="text" value={inputData}name="name" required/>
-            </label>
-        </form>
-        <DisplayTrackNames responseTrackData = {responseTrackData} />
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div className="w-screen h-screen bg-lighter-gray text-white" >
+          <form onSubmit={handleSubmit} className="p-10">
+              <label>
+                  Who's Your Favorite Artist?
+                  <input onChange={handleInputChange} className=" m-7 rounded bg-lightest-gray" type="text" value={inputData}name="name" required/>
+              </label>
+              {responseTrackData.length > 0 ? (
+            <Link href="/gamestart">hi</Link>
+          ) : (
+            <p>Enter Artist To Start Game</p>
+          )}
+          </form>
+          <DisplayTrackNames responseTrackData = {responseTrackData} />
+        
+      </div>
+    </QueryClientProvider>
   )
 }
 
