@@ -1,5 +1,7 @@
 "use client"
 import Link from "next/link.js";
+import './globals.css'; 
+
 export default function Home() {
 
   const getRefreshToken = async () => {
@@ -30,14 +32,14 @@ export default function Home() {
    }
 
   const spotifyAuth = async () => {
-    window.location.href = "http://localhost:8080/login";
+    window.location.href = "http://localhost:8080/login"; 
    }
    
 
   return (
-    <div>
-      <h1 className="text-center text-5xl p-4 text-teal-500">Album Alchemy</h1>
-      <button onClick={spotifyAuth}>Start Game</button>
+    <div className="w-screen h-screen bg-lighter-gray text-center p-40">
+      <h1 className="text-center p-7 text-6xl text-white font-spotify" >Album Alchemy</h1>
+      <button onClick={spotifyAuth} className="bg-pop-blue text-white p-2 text-center rounded font-extralight">Start Game</button>
     </div>
   );
 }

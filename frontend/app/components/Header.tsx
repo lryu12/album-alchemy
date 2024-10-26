@@ -1,13 +1,12 @@
-import Link from "next/link.js";
+import Link from "next/link";
 
 const Header = () => {
     return (
         <header>
-            <div className="border-2 border-blue-500 flexBetween maxContainer
-            padding-container relative z-30 py-5">
-            <Link href="/">
-            Album Alchemy
-            </Link>
+            <div className="bg-dark-gray text-white p-3" >
+                <Link href="/">
+                    Album Alchemy
+                </Link>
             </div>
         </header>
     );

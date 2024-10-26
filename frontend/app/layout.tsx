@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local/index.js";
-import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import './globals.css'
 
 const metadata: Metadata = {
   title: 'AlbumAlchemy',
@@ -16,10 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-        
         <body>
-        <Header/>
-        <main>
+        <Header className="bg-dark-gray"/>
+        <main className="w-full h-full overflow-scroll bg-lighter-gray">
         {children}
         </main>
         {/* <Footer/> */}

@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, useEffect } from 'react'
 import { Track} from 'models/Album.ts'
+import '../globals.css'
 const page = () => {
 
   const fetchAuth = async () => {
@@ -49,38 +50,29 @@ const page = () => {
 
   function DisplayTrackNames( { responseTrackData }: { responseTrackData: Track[] | null } ) {
     return (
-      <div>
+      <div className=" px-5 flex flex-wrap">
         {responseTrackData.length > 0 ? (
           responseTrackData.map((track, index) => 
-          <div>
-            <p key={index}>{track.name}</p>
-            <p key={index}>{track.total_tracks}</p>
+          <div key={index} className="flex flex-col items-center justify-center p-2">
+            <p>{track.name}</p>
+            <img className="w-3/4 rounded-lg"src={track.album.images[1].url} />
           </div>)
         ) : (
-          <p>Loading tracks...</p>
+          <p></p>
         )}
       </div>
     );
   }
-    
-  
-
-
-
-  
-
 
   return (
-    <div>
-        <form onSubmit={handleSubmit}>
+    <div className="w-screen h-screen bg-lighter-gray text-white" >
+        <form onSubmit={handleSubmit} className="p-10">
             <label>
                 Who's Your Favorite Artist?
-                <input onChange={handleInputChange}className="border-amber-500 border"type="text" value={inputData}name="name" required/>
+                <input onChange={handleInputChange} className=" m-7 rounded bg-lightest-gray" type="text" value={inputData}name="name" required/>
             </label>
-
         </form>
         <DisplayTrackNames responseTrackData = {responseTrackData} />
-        
     </div>
   )
 }
