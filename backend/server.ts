@@ -1,10 +1,8 @@
 import { Application, Router, type RouterContext } from "https://deno.land/x/oak@v17.1.0/mod.ts";
 import { oakCors } from "https://deno.land/x/cors@v1.2.2/mod.ts";
-import { load } from "jsr:@std/dotenv";
 import { Track } from "../models/Album.ts";
 import console from "node:console";
-const clientID = "3d979a6ac63b405a8840157f354f8238";
-const clientSecret = "7b3384f318de4e639df948d94ebfda62";
+import { load } from "jsr:@std/dotenv";
 const redirect_uri = "http://localhost:8080/callback";
 let artistUserInput : string | " " = " ";
 let globalAccessToken: string | null = null;
@@ -12,9 +10,9 @@ const router = new Router();
 const app = new Application();
 const port = 8080;
 console.log(`Server running on http://localhost:${port}`);
-
 console.log(await load({ export: true }));
-console.log(Deno.env.get("CLIENTID"));
+
+
 
 app.use(oakCors({
   origin: "http://localhost:3000",
@@ -25,7 +23,6 @@ app.use(oakCors({
 
 app.listen({ port: port });
 let artistID : string | null = null;
-
 
 router.post("/artistname", async (ctx : RouterContext<R, P, S>) => {
 
@@ -74,7 +71,7 @@ router.get("/callback", async (ctx) => {
     method: "POST",
     headers: {
       'content-type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic ' + btoa(`${clientID}:${clientSecret}`), 
+      'Authorization': 'Basic ' + btoa(`${Deno.env.get("CLIENTID")}:${Deno.env.get("CLIENTSECRET")}`), 
     },
     body: new URLSearchParams({
       code: code,
@@ -94,7 +91,7 @@ router.get("/callback", async (ctx) => {
 
 const queryParams = new URLSearchParams({
   response_type: 'code',
-  client_id: clientID,
+  client_id: Deno.env.get("CLIENTID"),
   redirect_uri: "http://localhost:8080/callback",
 }).toString(); 
 
