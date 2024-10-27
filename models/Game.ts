@@ -3,6 +3,6 @@ export class Game {
 
     constructor(artistID: string, ) {
         this.artistID = artistID;
-
+        
     }
 }

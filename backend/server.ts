@@ -24,7 +24,7 @@ app.use(oakCors({
 
 
 app.listen({ port: port });
-
+let artistID : string | null = null;
 
 
 router.post("/artistname", async (ctx : RouterContext<R, P, S>) => {
@@ -43,7 +43,7 @@ router.post("/artistname", async (ctx : RouterContext<R, P, S>) => {
   });
 
   const artistSearch = await artistData.json();
-  const artistID = artistSearch.artists.items[0].id;
+  artistID = artistSearch.artists.items[0].id;
 
   const artistTop5Tracks = await fetch ( `https://api.spotify.com/v1/artists/${artistID}/top-tracks`, {
     headers: {
@@ -103,6 +103,38 @@ router.get('/login', async (ctx) => {
   // todo: setup state to prevent cross origin attacks
   // const state = generateRandomString(16);
   await ctx.response.redirect('https://accounts.spotify.com/authorize?' + queryParams);
+});
+
+router.get('/getalbum', async (ctx) => {
+  if (artistID != null) {
+      try {
+          const albumsResponse = await fetch(`https://api.spotify.com/v1/artists/${artistID}/albums`, {
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+                  'Authorization': 'Bearer ' + globalAccessToken, 
+              }
+          });
+
+          // Check if the response is ok
+          if (!albumsResponse.ok) {
+              ctx.response.status = albumsResponse.status; // Set response status to the fetch error status
+              ctx.response.body = { error: 'Failed to fetch albums from Spotify' };
+              console.error('Error fetching albums:', albumsResponse.statusText);
+              return;
+          }
+
+          const albumObjects = await albumsResponse.json();
+          ctx.response.body = albumObjects; // Assuming albumObjects has the desired structure
+      } catch (error) {
+          ctx.response.status = 500; // Internal server error
+          ctx.response.body = { error: 'Internal Server Error' };
+          console.error('Error fetching albums:', error);
+      }
+  } else {
+      ctx.response.status = 400; // Bad Request
+      ctx.response.body = { error: 'artistID cannot be found' };
+      console.error("artistID cannot be found");
+  }
 });
 
 app.use(router.routes());
