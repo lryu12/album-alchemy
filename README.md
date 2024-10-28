@@ -1,4 +1,4 @@
-# How well do you know your favorite artist?
+# Album Alchemy
 ### Trivia-style game with methods of song-clippets, album covers, etc.
 ### You can attain a point for each question you get right during the quiz session or start over if you get the answer wrong.
 
