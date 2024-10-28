@@ -11,6 +11,13 @@
 - React-Query (wip)
 - Redis (wip)
 
-Currently implementing React-Query to fetch all data for reduction of 
+### To start application:
+1. Clone repo
+2. Install Deno
+3. in cli - cd to backend directory
+4. run command "deno run --allow-env server.ts"
+5. open another terminal
+6. cd to frontend directory
+7. run command "deno task dev"
+8. Album Alcheny should be available on your local device!
 
-Created in TypeScript
