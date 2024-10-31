@@ -33,3 +33,7 @@ export class Track {
     }
   
 }
+
+export class Artist {
+    artists: string[];
+}

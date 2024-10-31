@@ -3,7 +3,7 @@ import Link from "next/link";
 const Header = () => {
     return (
         <header>
-            <div className="bg-dark-gray text-white p-3" >
+            <div className="bg-darkest-gray text-white p-3" >
                 <Link href="/">
                     Album Alchemy
                 </Link>

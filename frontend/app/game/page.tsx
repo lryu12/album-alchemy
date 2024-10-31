@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider ,useQuery, useQueryClient, useMutation
 import '../globals.css'
 
 const queryClient = new QueryClient();
-const page = () => {
+const Page = () => {
 
   const fetchAuth = async () => {
     try {
@@ -81,16 +81,17 @@ const page = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="w-screen h-screen bg-lighter-gray text-white" >
-          <form onSubmit={handleSubmit} className="p-10">
-              <label>
-                  Who's Your Favorite Artist?
-                  <input onChange={handleInputChange} className=" m-7 rounded bg-lightest-gray" type="text" value={inputData}name="name" required/>
+      <div className="w-screen h-screen bg-dark-gray text-white" >
+          <form onSubmit={handleSubmit} className="p-10 flex flex-col">
+            <h1>Who's Your Favorite Artist?</h1>
+              <label className="w-4">
+                  <input onChange={handleInputChange} placeholder="Travis Scott" className=" mr-3 rounded bg-lighter-gray hover:bg-lightest-gray text-sm" type="text" value={inputData}name="name" required/>
+                  <button type="submit" className="bg-lighter-gray rounded-full py-2 px-2 font-bold mt-5">Submit</button>
               </label>
               {responseTrackData.length > 0 ? (
-            <Link href="/gamestart">hi</Link>
+            <Link href="/gamestart" className="bg-blue-700 hover:bg-blue-950 w-fit rounded-full font-bold px-2 py-2">Click to Begin Quiz!</Link>
           ) : (
-            <p>Enter Artist To Start Game</p>
+            <p></p>
           )}
           </form>
           <DisplayTrackNames responseTrackData = {responseTrackData} />
@@ -100,5 +101,4 @@ const page = () => {
   )
 }
 
-export default page
-
+export default Page
