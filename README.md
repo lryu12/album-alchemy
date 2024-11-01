@@ -9,7 +9,6 @@
 - Next.js
 - Tailwind CSS
 - React-Query (wip)
-- Redis (wip)
 
 ### To start application:
 1. Clone repo
