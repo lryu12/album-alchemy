@@ -14,7 +14,7 @@ export default function Home() {
       </h1>
       <button
         onClick={spotifyAuth}
-        className="bg-blue-400 text-black p-2 text-center rounded-lg  font-normal hover:bg-blue-500"
+        className="bg-green-500 text-black p-2 text-center rounded-lg  font-normal hover:bg-green-700"
       >
         Start Game
       </button>

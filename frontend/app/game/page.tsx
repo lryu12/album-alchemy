@@ -54,10 +54,10 @@ const Page = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="w-screen h-screen bg-dark-gray text-white">
-        <form onSubmit={handleSubmit} className="p-10 flex flex-col">
+      <div className="w-screen h-screen bg-dark-gray text-white flex flex-row justify-evenly">
+        <form onSubmit={handleSubmit} className="flex flex-col w-1/3 items-center justify-center bg-lightest-gray">
           <h1>Who's Your Favorite Artist?</h1>
-          <label className="w-4">
+          <label className="">
             <input
               onChange={handleInputChange}
               placeholder="Travis Scott"
@@ -69,14 +69,14 @@ const Page = () => {
             />
             <button
               type="submit"
-              className="bg-lighter-gray rounded-full py-2 px-2 font-bold mt-5"
+              className="bg-green-500 text-black p-2 text-center rounded-lg  font-normal hover:bg-green-700"
             >
               Submit
             </button>
           </label>
           <>
             {apiState
-              ? <Link href="/gamestart" className="bg-blue-300 py-2 px-2 w-20">Click to Start Game</Link>
+              ? <Link href="/gamestart" className="bg-green-500 text-black p-2 text-center rounded-lg  font-normal hover:bg-green-700">Click to Start Game</Link>
               : <p>Enter Artist To Start Game</p>}
           </>
         </form>

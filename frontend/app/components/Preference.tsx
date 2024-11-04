@@ -15,9 +15,12 @@ const Preference = ({ wantArtist }) => {
 
     const handleAddArtist = async (e: React.FormEvent) => {
       e.preventDefault();
-      addArtists();
-      console.log("pressed");
+      const success = await addArtists();
+      if (success) {
+        retrieveArtists(); 
+      }
     };
+
 
     const handleAddArtistInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setArtistToAdd(e.target.value);
@@ -42,7 +45,7 @@ const Preference = ({ wantArtist }) => {
 
     
 
-    async function addArtists() {
+    async function addArtists() : boolean {
       try {
           const response = await fetch("http://localhost:8080/preference/add",{
             method: "POST",
@@ -51,14 +54,21 @@ const Preference = ({ wantArtist }) => {
             },
             body: JSON.stringify({ artist_name: artistToAdd }), 
           });
+
+          if (!response.ok) {
+            return false;
+          } else{
+            return true;
+          }
       } catch {
         console.error("AddArtists failed to fetch ");
-      }
+        return false;
+      } 
     }
     
 
     return (
-      <div className="flex justify-center align-middle">
+      <div className="flex flex-col justify-center items-center h-fill w-1/3">
         <form onSubmit={handleAddArtist}>
             <input 
               onChange={handleAddArtistInputChange}
@@ -68,12 +78,12 @@ const Preference = ({ wantArtist }) => {
               type="text"
               name="name"
               required />
-            <button type="submit">
+            <button type="submit" className="bg-green-500 text-black p-2 text-center rounded-lg  font-normal hover:bg-green-700">
               Add Artist To Collection
             </button>
         </form>
-            <div className="w-1/2 flex flex-col justify-center">
-              <h2 className="text-center pb-5"> My Artist Collections</h2>
+            <div className="w-fill flex flex-col justify-center">
+              <h2 className="text-center p-5 text-2xl"> My Artist Collections</h2>
               <div className="border-b-2">
                   {artists.map((artist, index) => (
                       <div className="bg-lightest-gray text-center border-x-2 border-t-2" key={index}>{artist}</div>
