@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: 'CircularBlack';
-    src: url("public/CircularStd-Black.otf") format('opentype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "CircularBlack";
+  src: url("public/CircularStd-Black.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
 }

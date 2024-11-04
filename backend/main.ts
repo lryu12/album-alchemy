@@ -1,1 +1,0 @@
-import { dbRouter } from './config/db.ts'
