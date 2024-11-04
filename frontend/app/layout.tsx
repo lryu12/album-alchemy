@@ -1,12 +1,16 @@
+"use client";
 import type { Metadata } from "next";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import './globals.css'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import "./globals.css";
+
+const queryClient = new QueryClient();
 
 const metadata: Metadata = {
-  title: 'AlbumAlchemy',
-  description: 'How well do you know your favorite artist?'
-}
+  title: "AlbumAlchemy",
+  description: "How well do you know your favorite artist?",
+};
 
 export default function RootLayout({
   children,
@@ -14,14 +18,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <QueryClientProvider client={queryClient}>
+      <html lang="en">
         <body>
-        <Header className="bg-dark-gray"/>
-        <main className="w-full h-full overflow-scroll bg-lighter-gray">
-        {children}
-        </main>
-        {/* <Footer/> */}
+          <Header className="bg-dark-gray" />
+          <main className="w-full h-full overflow-scroll bg-lighter-gray">
+            {children}
+          </main>
         </body>
-    </html>
+      </html>
+    </QueryClientProvider>
   );
 }

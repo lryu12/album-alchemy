@@ -1,8 +1,7 @@
 export class Game {
-    artistID: string;
+  artistID: string;
 
-    constructor(artistID: string, ) {
-        this.artistID = artistID;
-        
-    }
+  constructor(artistID: string) {
+    this.artistID = artistID;
+  }
 }
